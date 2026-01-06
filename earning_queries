@@ -1,0 +1,39 @@
+/* ============================================================
+   Department Level QTD Compensation Summary
+   Business Question:
+   How is quarter-to-date (QTD) employee compensation distributed
+   across the City of Philadelphia departments?
+   ============================================================ */
+/*
+
+
+Purpose:
+
+To look at how employee compenssation is spread across city departments including base pay, overtime,  longevity pay, and post separation payments.
+
+
+Why this approach:
+- The data is reported as quarter-to-be (QTD), aggregating by department provides a clear snapshot of payroll activity at this point in the quarter.
+- Breaking coompensation into indvidual components makes it easier to see how departments differ in overtime use, longevity pay, and separation-related costs.
+- COALESCE is used to treat missing values as zero and avoid skewing totals.
+
+Design Choices:
+- Compensation types are summed separately to highlight differences in how departments structure pay.
+- Departments are ordered by total QTD compensation to quickly identify where most payroll spending occurs.
+= Results reflect payroll activity as of the data extract date and should not be interpreted as annual salary totals.
+
+*/
+
+
+SELECT department_name,
+ROUND(SUM(base_salary),2) AS base_qtd_total,
+ROUND(SUM(COALESCE(overtime_gross_pay_qtd,0)),2) AS overtime_qtd_total,
+ROUND(SUM(COALESCE(longevity_gross_pay_qtd,0)),2) AS longevity_qtd_total,
+ROUND(SUM(COALESCE(post_separation_gross_pay_qtd,0)), 2) AS post_separation_qtd_total,
+ROUND(SUM(base_gross_pay_qtd 
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd,0)
++ COALESCE(post_separation_gross_pay_qtd,0)), 2) AS total_comp_qtd
+FROM employeeEarnings
+GROUP BY department_name
+ORDER BY total_comp_qtd DESC;
