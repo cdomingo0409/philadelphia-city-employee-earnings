@@ -20,3 +20,12 @@ Analyze publicly available data on the City of Philadelphia employee earnings. T
 - SQLiteStudio
 - SQL
 - Tableau
+
+
+📊 Key Business Question: How is QTD Employee Compensation Distributed Across City Departmetns?
+
+Quarter-to-date (QTD) employee compensation was analyzed by aggregating base pay, overtime, longevity pay, and post-separation payments at the department level. Since the data is reported as QTD, the results reflect payroll activity at this point in the quarter rather than annual salary totals. Missing values were treated as zero to ensure accurate comparisons.
+
+Key Insights:
+
+Compensation spending is concentrated in public safety departments, particularly Police, Fire, and Prisons. These departments show much higher overtime usage compared to administrative departments, which rely mostly on base pay. WHile less common, post-separation payments can be noticeably impact quarterly totals for some departments.
