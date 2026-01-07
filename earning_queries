@@ -38,3 +38,53 @@ ROUND(SUM(base_gross_pay_qtd
 FROM employeeEarnings
 GROUP BY department_name
 ORDER BY total_comp_qtd DESC;
+
+
+
+
+
+/* ============================================================
+   DEPARTMENT COMPENSATION DRIVERS (QTD)
+   Business Question:
+   What is driving quarter-to-date (QTD) compensation within each
+   City of Philadelphia department?
+   ============================================================ */
+/*
+
+/*
+
+Purpose:
+
+This query breaks down QTD employee compensation by department to understand which pay components contribute most to overall payroll costs.
+
+
+Why this approach:
+- Compensation is reported as QTD, so aggregating by department provide a consistent look for a given reporting period.
+- Separating base pay, overtime, longevity, and post separation pay makes it easiery to identify departments that rely heavily on overtime or one time payments.
+- COALESCE is used to treat missing values as zero so totals are not undestated.
+
+Design Choices:
+- Grouped at the department level to match how city payroll spending is typically reviewed.
+- Can be filtered by calendar year and quarter for period comparison.
+- Results are ordered by total QTD compensation to highlight the largest payroll cost drivers.
+*/
+
+
+SELECT department_name,
+ROUND(SUM(base_gross_pay_qtd),2) AS base_qtd,
+ROUND(SUM(overtime_gross_pay_qtd),2) AS overtime_qtd,
+ROUND(SUM(longevity_gross_pay_qtd),2) AS longevity_qtd,
+ROUND(SUM(post_separation_gross_pay_qtd),2) AS post_separation_qtd,
+ROUND(SUM(base_gross_pay_qtd
++ COALESCE (overtime_gross_pay_qtd, 0)
++ COALESCE (longevity_gross_pay_qtd, 0)
++ COALESCE (post_separation_gross_pay_qtd, 0)
+), 2) AS total_qtd_compensation
+FROM employeeEarnings
+
+-- filter that is locked to a single reporting period, can be added and modified if wanted
+-- WHERE calendar_year = 2023
+--  AND quarter = 1
+
+GROUP BY department_name
+ORDER BY total_qtd_compensation DESC;
