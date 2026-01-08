@@ -87,3 +87,76 @@ FROM employeeEarnings
 
 GROUP BY department_name
 ORDER BY total_qtd_compensation DESC;
+
+
+
+
+
+/* ============================================================
+   OVERTIME RELIANCE BY DEPARTMENT (QTD)
+   Business Question:
+   Which departments rely most heavily on overtime as a share
+   of their total quarter-to-date (QTD) compensation?
+   ============================================================ */
+/*
+
+Purpose:
+
+This query is to analyze overtime as a percentage of total QTD compensation by department to understand where overtime plays a signficant role in overall payroll costs.
+
+
+Why this approach:
+- Looking at overtime as a percentage of total compensation provides better context than raw overtime dollars and allows fair comparison across departments of different sizes.
+- Using QTD values provides a consistent snapshot of payroll activity for a given reporting period without implying annualized spending.
+- COALESCE is used to treat missing overtime values as zero so totals are not understated.
+
+
+Design Choices:
+- Grouped at the department level to align with how city payroll spending is typically reviewed.
+- All compensation components are included in the total to reflect the full payroll picture for each department.
+- Results are ordered by overtime percentage to highlight departments where overtime has the greatest impact.
+
+*/
+
+
+SELECT department_name,
+ROUND(SUM(COALESCE(overtime_gross_pay_qtd,0)),2) AS overtime_qtd,
+ROUND(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd, 0)
+ + COALESCE(longevity_gross_pay_qtd, 0)
++ COALESCE(post_separation_gross_pay_qtd, 0)
+), 2) AS total_qtd_compensation,
+ROUND(
+100.0 * SUM(COALESCE(overtime_gross_pay_qtd,0)) / NULLIF(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd, 0)
++ COALESCE(post_separation_gross_pay_qtd, 0)
+), 0), 2)AS overtime_pct_of_total
+
+FROM employeeEarnings
+-- filter that is locked to a single reporting period that can be changed if needed.
+-- WHERE calendar_year = 2023
+-- AND quarter = 1
+
+   
+GROUP BY department_name
+ORDER BY overtime_pct_of_total DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
