@@ -102,8 +102,7 @@ ORDER BY total_qtd_compensation DESC;
 
 Purpose:
 
-This query is to analyze overtime as a percentage of total QTD compensation by department to understand where overtime plays a signficant role in overall payroll costs.
-
+This query calculates overtime as a percentage of total QTD compensation for each department to identify where overtime plays a meaningful role in overall payroll costs.
 
 Why this approach:
 - Looking at overtime as a percentage of total compensation provides better context than raw overtime dollars and allows fair comparison across departments of different sizes.
@@ -112,9 +111,10 @@ Why this approach:
 
 
 Design Choices:
-- Grouped at the department level to align with how city payroll spending is typically reviewed.
-- All compensation components are included in the total to reflect the full payroll picture for each department.
-- Results are ordered by overtime percentage to highlight departments where overtime has the greatest impact.
+- Compensation components are combined into a single total to reflect the full payroll picture of each department.
+- Overtime is expressed as a percentage to highlight reliance rather than scale.
+- Results are grouped at the department level to match how city payroll spending is typically reviewed.
+- Departments are ordered by overtime percentage to clearly highlight overtime heavy departments.
 
 */
 
