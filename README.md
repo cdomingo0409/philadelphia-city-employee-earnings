@@ -40,3 +40,11 @@ Key Insights:
 Most departments are primarily driven by base pay, but overtime pay plays a much larger role in public safety and operational departments like police and fire. Longevity and post separation pay are less common, but when present, they can noticeably increase QTD totals and should be considered separately from ongoing payroll costs.
 
 
+
+
+**📊 Key Business Question: How reliant are departments on overtime?**
+
+Overtime was analyzed as a percentage of total QTD compensation rather than looking at overtime dollars alone. This approach makes it easier to compare departments of different size and understand where overtime meaningfully contributes to overall payroll costs.
+
+Key Insight:
+Most departments rely primarily on base pay, but overtime makes up a significantly larger share of compensation in public safety and operational departments. This indicates that higher payroll costs in these areas are driven not only by staffing levels but also by increased overtime usage during the quarter.
