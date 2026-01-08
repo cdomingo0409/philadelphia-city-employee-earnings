@@ -29,3 +29,14 @@ Quarter-to-date (QTD) employee compensation was analyzed by aggregating base pay
 Key Insights:
 
 Compensation spending is concentrated in public safety departments, particularly Police, Fire, and Prisons. These departments show much higher overtime usage compared to administrative departments, which rely mostly on base pay. WHile less common, post-separation payments can be noticeably impact quarterly totals for some departments.
+
+
+
+📊 Key Business Question: What is driving compensation within each department?
+
+Looked at QTD compensation by breaking payroll into base pay, overtime, longevity, and post separation payments at each department. This makes it easier to see not just how much each department costs, but what's actually driving these costs. Missing values were treated as zero so totals weren't understated.
+
+Key Insights:
+Most departments are primarily driven by base pay, but overtime pay plays a much larger role in public safety and operational departments like police and fire. Longevity and post separation pay are less common, but when present, they can noticeably increase QTD totals and should be considered separately from ongoing payroll costs.
+
+
