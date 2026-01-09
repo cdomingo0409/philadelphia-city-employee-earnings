@@ -146,16 +146,67 @@ ORDER BY overtime_pct_of_total DESC;
 
 
 
+/* ============================================================
+   SUPPLEMENTAL PAY IMPACT BY DEPARTMENT (QTD)
+   Business Question:
+   Do longevity or post-separation payments materially impact
+   quarter-to-date (QTD) compensation totals for certain departments?
+   ============================================================ */
+/*
+
+Purpose:
+
+This query looks at how much longevity and post separation payments contributes to total QTD compentation at department level. The goal is to see where one-tiome or supplemental pay may be noticeably inflating quarterly totals.
 
 
+Why this approach:
+- Using percentages makes it easier to compare departments of different sizes.
+- QTD values provide a clear snapshot for a given period without implying annual totals.
+- COALESCE is used so missing values don't understate compensation.
 
 
+Design Choices:
+- Longevity and post separation pay are analyzed both individually and together to capture their combined impact.
+- Departments are ranked by total supplemental pay share to highlight where non base compensation matters most.
+
+*/
 
 
+SELECT department_name,
+ROUND(SUM(COALESCE(longevity_gross_pay_qtd, 0)),2) AS longevity_qtd,
+ROUND(SUM(COALESCE(post_separation_gross_pay_qtd, 0)),2) AS post_separation_qtd,
+ROUND(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd,0)
++ COALESCE(post_separation_gross_pay_qtd,0)),2) AS total_qtd_compensation,
 
+ROUND(100.0*SUM(COALESCE(longevity_gross_pay_qtd,0))
+/NULLIF(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd,0)
++ COALESCE(post_separation_gross_pay_qtd,0)),0), 2) AS longevity_pct,
 
+ROUND(100.0*SUM(COALESCE(post_separation_gross_pay_qtd,0))
+/NULLIF(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd,0)
++ COALESCE(post_separation_gross_pay_qtd,0)),0), 2) AS post_separation_pct,
 
+ROUND(100.0*(SUM(COALESCE(post_separation_gross_pay_qtd,0)) 
++ SUM(COALESCE(longevity_gross_pay_qtd,0)))
+/NULLIF(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd,0)
++ COALESCE(post_separation_gross_pay_qtd,0)),0), 2) AS supplemental_pct_of_total
 
+FROM employeeEarnings
+
+-- options that can be filtered if needed
+-- WHERE calendar_year = 2021
+-- AND quarter = 2
+
+GROUP BY department_name
+ORDER BY supplemental_pct_of_total DESC;
 
 
 
