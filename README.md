@@ -48,3 +48,14 @@ Overtime was analyzed as a percentage of total QTD compensation rather than look
 
 Key Insight:
 Most departments rely primarily on base pay, but overtime makes up a significantly larger share of compensation in public safety and operational departments. This indicates that higher payroll costs in these areas are driven not only by staffing levels but also by increased overtime usage during the quarter.
+
+
+
+
+
+**📊 Key Business Question: Are supplemental or one time payments impacting department compensation?**
+
+Looked at longevity and post separation payments as percentage of total QTD compensation instead of dollars. This makes it easier to compare departments of different sizes and see where these types of payments actually move the needle on overall payroll totals.
+
+Key Insights:
+For most departments, compensation is still largely driven by base pay. That said, there are a few departments where longevity or post separation payments noticeably increase QTD totals for a given quarter, showing that some spikes in payroll are tied to one time or transitional payments rather than ongoing staffing costs.
