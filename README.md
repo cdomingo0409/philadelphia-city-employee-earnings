@@ -59,3 +59,14 @@ Looked at longevity and post separation payments as percentage of total QTD comp
 
 Key Insights:
 For most departments, compensation is still largely driven by base pay. That said, there are a few departments where longevity or post separation payments noticeably increase QTD totals for a given quarter, showing that some spikes in payroll are tied to one time or transitional payments rather than ongoing staffing costs.
+
+
+
+
+
+** 📊 Key Business Question: How do compensation patterns change over time?**
+
+Instead of treating this as a one time snapshot, I built the analysis so the same department and pay breakdown views can be compared across different reporting periods (2019-2025). By filtering by year and quarter, it's easy to see whether changes in total compennsation are coming from base pay, overtime, or one tiome overtime payments like pose separation pay.
+
+Key Insight:
+Compensation patterns aren't consistent yet every quarter, some departments stay mostly base pay driven, while others shift depending on overtime needs or one time payments. Using the perion filter makes those changes easy to spot without mixing quarters together or impying annual totals.
