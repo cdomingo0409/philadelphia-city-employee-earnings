@@ -211,3 +211,77 @@ ORDER BY supplemental_pct_of_total DESC;
 
 
 
+
+/* ============================================================
+   COMPENSATION OVER TIME (QTD)
+   Business Question:
+   How do compensation totals and pay components change across
+   reporting periods (2019-2025)
+   ============================================================ */
+/*
+
+Purpose:
+
+To compare QTD compensation across time by grouping results by calendar year and quarter. This makes it easy to see how overall payroll and pay components shift from period to period without mixing quarters together.
+
+
+Why this approach?:
+- QTD pay is already a time based snapshot, so grouping by year and quarter keeps the analysis consistent across the dataset.
+- Looking at base, overtime, longevity, and post separation separately helps show what's actually driving changes in total compensation.
+- COALESCE is used so missing values count as zero and totals arent accidentally undertstated.
+
+
+Design choice:
+- Grouping by calendar_year and quarter keeps the timeline clean and avoids implying annual totals.
+- Total QTD compensation is calculated as the sum of base, overtime, longevity, and post separation to match how the dashboard a defines "total compensation."
+- Results are ordered by year and quarter so the output is already timeline ready.
+
+*/
+
+
+-- Total QTD compensation and other components for each reporting period
+SELECT calendar_year, quarter,
+ROUND(SUM(base_gross_pay_qtd), 2) AS base_qtd,
+ROUND(SUM(COALESCE(overtime_gross_pay_qtd, 0)), 2) AS overtime_qtd,
+ROUND(SUM(COALESCE(longevity_gross_pay_qtd, 0)), 2) AS longevity_qtd,
+ROUND(SUM(COALESCE(post_separation_gross_pay_qtd, 0)), 2) AS post_separation_qtd,
+ROUND(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd, 0)
++ COALESCE(post_separation_gross_pay_qtd,0)), 2) AS total_qtd_compensation
+FROM employeeEarnings
+GROUP BY calendar_year, quarter
+ORDER BY calendar_year, quarter;
+
+
+-- shows which department changes across periods and by how much
+SELECT calendar_year, quarter, department_name,
+ROUND(SUM(base_gross_pay_qtd
++ COALESCE(overtime_gross_pay_qtd,0)
++ COALESCE(longevity_gross_pay_qtd, 0)
++ COALESCE(post_separation_gross_pay_qtd,0)), 2) AS total_qtd_compensation
+FROM employeeEarnings
+GROUP BY calendar_year, quarter,department_name
+ORDER BY calendar_year, quarter, total_qtd_compensation DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
