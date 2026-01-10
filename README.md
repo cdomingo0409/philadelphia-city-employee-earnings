@@ -89,7 +89,7 @@ Tools Used:
 
 Dashboard Preview:
 
-![Employee Earnings Dashboard](City of Philadelphia Employee Compensation Dashboard.png)
+![Employee Earnings Dashboard](CompensationDashboard.png)
 
 Live Dashboard (Tableau Public):
 👉https://public.tableau.com/views/CityofPhiladelphiaEmployeeCompensation-QTDAnalysis/CityofPhiladelphiaEmployeeCompensation-QTDAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
