@@ -70,3 +70,43 @@ Instead of treating this as a one time snapshot, I built the analysis so the sam
 
 Key Insight:
 Compensation patterns aren't consistent yet every quarter, some departments stay mostly base pay driven, while others shift depending on overtime needs or one time payments. Using the perion filter makes those changes easy to spot without mixing quarters together or impying annual totals.
+
+
+**📊 Philadelphia Employee Compensation QTD Analysis Dashboard** 
+
+Analyzed the City of Philadelphia employee compensation data to better understand how payroll spending is distributed across departments and what factors drive overall compensation. SQL was used to perform the analysis and the results were visualized through an interactive Tableau dashboard.
+
+Key Features:
+- Analyzed total QTD compensation by department
+- Broke compensation into base pay, overtime, longevity, and post separation pay
+- Examined overtime as share of total compensation across deparments
+- Identified departments more impacted by supplemental or one time payments
+- Reviewed compensation trends across reporting from 2019 to 2025
+
+Tools Used:
+- SQL (SQLite)
+- Tableau
+
+Dashboard Preview:
+
+![Employee Earnings Dashboard](City of Philadelphia Employee Compensation Dashboard.png)
+
+Live Dashboard (Tableau Public):
+👉https://public.tableau.com/views/CityofPhiladelphiaEmployeeCompensation-QTDAnalysis/CityofPhiladelphiaEmployeeCompensation-QTDAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
