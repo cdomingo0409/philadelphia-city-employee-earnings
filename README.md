@@ -1,4 +1,4 @@
-💡 Tip: Read this section first for an overview of the project, questions, and key insights. **In Progress**
+💡 Tip: Read this section first for an overview of the project, questions, and key insights.
 
 ## 📊Philadelphia City Employee Earnings Analysis
 
